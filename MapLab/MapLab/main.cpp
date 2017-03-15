@@ -7,7 +7,7 @@ void GoNorth(Map &map);
 void GoSouth(Map &map);
 void GoEast(Map &map);
 void GoWest(Map &map);
-void PathToHome();
+void PathToHome(Map &map);
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
 		case 3: GoEast(map); break;
 		case 4: GoSouth(map); break;
 		case 5: GoWest(map); break;
-		//case 6: PathToHome(map); break;
+		case 6: PathToHome(map); break;
 		default: cout << "Enter a valid option"; break;
 		}
 		system("pause");
@@ -57,7 +57,7 @@ void GoNorth(Map &map)
 	map._currentLocation = map._currentLocation->North;
 	cout << "You are now at " + map._currentLocation->getName() << endl;
 
-	map.path.push(map._currentLocation);
+	map.Path.push(map._currentLocation);
 
 }
 
@@ -115,9 +115,10 @@ void GoWest(Map &map)
 	map.Path.push(map._currentLocation);
 }
 
-void PathToHome()
+void PathToHome(Map &map)
 {
-
+	map.Path.pop();
+	return;
 
 	//pop off
 }
