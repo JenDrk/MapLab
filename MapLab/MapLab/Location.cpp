@@ -11,7 +11,7 @@ Location::~Location()
 {
 }
 
-std::string Location::getLocationInfo()
+std::string Location::getName()
 {
 	return _name;
 }
