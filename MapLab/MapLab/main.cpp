@@ -44,14 +44,28 @@ int main()
 void GoNorth(Map &map)
 {
 	system("cls");
+	int currentX = map._currentLocation->getX();
+	int currentY = map._currentLocation->getY();
 	if (map._currentLocation->North == nullptr)
 	{
-		cout << "You haven't been here before. Enter a Name: ";
-		string newName;
-		cin >> newName;
+		int newX = currentX;
+		int newY = currentY + 1;
+		auto existing = map.LookupLocationOnMap(newX, newY);
 
-		map._currentLocation->North = new Location(newName);
-		map._currentLocation->North->South = *&map._currentLocation;
+		if (existing == nullptr)
+		{
+			cout << "You haven't been here before. Enter a Name: ";
+			string newName;
+			cin >> newName;
+
+			map._currentLocation->North = new Location(newName, newX, newY);
+			map._currentLocation->North->South = *&map._currentLocation;
+		}
+		else
+		{
+			cout << "You've ben here before. " << existing->getName();
+		}
+		
 	}
 
 	map._currentLocation = map._currentLocation->North;
@@ -63,14 +77,19 @@ void GoNorth(Map &map)
 
 void GoSouth(Map &map)
 {
+	int currentX = map._currentLocation->getX();
+	int currentY = map._currentLocation->getY();
 	system("cls");
+
 	if (map._currentLocation->South == nullptr)
 	{
+		int newX = currentX;
+		int newY = currentY - 1;
 		cout << "You haven't been here before. Enter a Name: ";
 		string newName;
 		cin >> newName;
 
-		map._currentLocation->South = new Location(newName);
+		map._currentLocation->South = new Location(newName, newX, newY);
 		map._currentLocation->South->North = *&map._currentLocation;
 	}
 
@@ -81,14 +100,18 @@ void GoSouth(Map &map)
 
 void GoEast(Map &map)
 {
+	int currentX = map._currentLocation->getX();
+	int currentY = map._currentLocation->getY();
 	system("cls");
 	if (map._currentLocation->East == nullptr)
 	{
+		int newX = currentX + 1;
+		int newY = currentY;
 		cout << "You haven't been here before. Enter a Name: ";
 		string newName;
 		cin >> newName;
 
-		map._currentLocation->East = new Location(newName);
+		map._currentLocation->East = new Location(newName, newX, newY);
 		map._currentLocation->East->West = *&map._currentLocation;
 	}
 
@@ -99,14 +122,18 @@ void GoEast(Map &map)
 
 void GoWest(Map &map)
 {
+	int currentX = map._currentLocation->getX();
+	int currentY = map._currentLocation->getY();
 	system("cls");
 	if (map._currentLocation->West == nullptr)
 	{
+		int newX = currentX - 1;
+		int newY = currentY;
 		cout << "You haven't been here before. Enter a Name: ";
 		string newName;
 		cin >> newName;
 
-		map._currentLocation->West = new Location(newName);
+		map._currentLocation->West = new Location(newName, newX, newY);
 		map._currentLocation->West->East = *&map._currentLocation;
 	}
 
@@ -117,8 +144,7 @@ void GoWest(Map &map)
 
 void PathToHome(Map &map)
 {
-	map.Path.pop();
-	return;
+	cout << map.Path.top() << endl;
 
 	//pop off
 }
