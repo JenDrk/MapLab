@@ -3,6 +3,10 @@
 #include "Map.h"
 using namespace std;
 
+//PathToHome
+//Map Lookup
+//home
+
 void GoNorth(Map &map);
 void GoSouth(Map &map);
 void GoEast(Map &map);
@@ -63,14 +67,16 @@ void GoNorth(Map &map)
 		}
 		else
 		{
-			cout << "You've ben here before. " << existing->getName();
+			cout << "You've been here before. " << existing->getName();
 		}
 		
 	}
+	else
+	{
+		cout << map._currentLocation->getName();
+	}
 
 	map._currentLocation = map._currentLocation->North;
-	cout << "You are now at " + map._currentLocation->getName() << endl;
-
 	map.Path.push(map._currentLocation);
 
 }
@@ -144,7 +150,12 @@ void GoWest(Map &map)
 
 void PathToHome(Map &map)
 {
-	cout << map.Path.top() << endl;
+	for (int i = 0; i < map.Path.size(); i++)
+	{
+		cout << map.Path.top();
+		map.Path.pop();
+	}
+	
+	
 
-	//pop off
 }
