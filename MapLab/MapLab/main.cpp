@@ -150,12 +150,12 @@ void GoWest(Map &map)
 
 void PathToHome(Map &map)
 {
-	for (int i = 0; i < map.Path.size(); i++)
+	while (!map.Path.empty())
 	{
-		cout << map.Path.top();
+		cout << map.Path.top()->getName();
 		map.Path.pop();
 	}
-	
+	//print out name not address
 	
 
 }
