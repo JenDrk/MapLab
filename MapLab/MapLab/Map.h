@@ -7,7 +7,6 @@
 class Map
 {
 private:
-	//std::stack<Location *> _locationsVisited;
 	std::unordered_map<std::string, Location *> _mapLookup;
 public:
 	Map(std::string startingLocationName);
