@@ -3,15 +3,13 @@
 #include "Map.h"
 using namespace std;
 
-//PathToHome
-//Map Lookup
-//home
 
 void GoNorth(Map &map);
 void GoSouth(Map &map);
 void GoEast(Map &map);
 void GoWest(Map &map);
 void PathToHome(Map &map);
+void HowDidIGetHere(Map &map);
 
 int main()
 {
@@ -26,6 +24,7 @@ int main()
 		cout << "4) Go South" << endl;
 		cout << "5) Go West" << endl;
 		cout << "6) Path To Home" << endl;
+		cout << "7) How Did I Get Here?" << endl;
 		cout << "0) Exit" << endl;
 		cin >> choice;
 
@@ -37,6 +36,7 @@ int main()
 		case 4: GoSouth(map); break;
 		case 5: GoWest(map); break;
 		case 6: PathToHome(map); break;
+		case 7: HowDidIGetHere(map); break;
 		default: cout << "Enter a valid option"; break;
 		}
 		system("pause");
@@ -78,7 +78,7 @@ void GoNorth(Map &map)
 
 	map._currentLocation = map._currentLocation->North;
 	map.Path.push(map._currentLocation);
-
+	map.GetHere.push(map._currentLocation);
 }
 
 void GoSouth(Map &map)
@@ -114,6 +114,7 @@ void GoSouth(Map &map)
 
 	map._currentLocation = map._currentLocation->South;
 	map.Path.push(map._currentLocation);
+	map.GetHere.push(map._currentLocation);
 }
 
 void GoEast(Map &map)
@@ -149,6 +150,7 @@ void GoEast(Map &map)
 
 	map._currentLocation = map._currentLocation->East;
 	map.Path.push(map._currentLocation);
+	map.GetHere.push(map._currentLocation);
 }
 
 void GoWest(Map &map)
@@ -184,6 +186,7 @@ void GoWest(Map &map)
 
 	map._currentLocation = map._currentLocation->West;
 	map.Path.push(map._currentLocation);
+	map.GetHere.push(map._currentLocation);
 
 }
 
@@ -193,5 +196,14 @@ void PathToHome(Map &map)
 	{
 		cout << map.Path.top()->getName();
 		map.Path.pop();
+	}
+}
+
+void HowDidIGetHere(Map &map)
+{
+	while (!map.GetHere.empty())
+	{
+		cout << map.GetHere.front()->getName();
+		map.GetHere.pop();
 	}
 }
